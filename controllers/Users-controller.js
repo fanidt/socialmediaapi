@@ -74,7 +74,7 @@ const Userscontroller = {
         )
         .then(dbusersData => {
             if (!dbusersData) {
-                res.status(404).json({ message: 'No user found with this ID!' });
+                res.status(404).json({ message: 'No user found with this id!' });
                 return;
             }
             res.json(dbusersData);

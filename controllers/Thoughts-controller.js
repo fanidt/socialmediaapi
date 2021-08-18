@@ -41,12 +41,12 @@ const Thoughtscontroller = {
                     { new: true }
                 );
             })
-            .then(dbusersData => {
-                if (!dbusersData) {
+            .then(dbthoughtData => {
+                if (!dbthoughtData) {
                     res.status(404).json({ message: 'No user found with this username!' });
                     return;
                 }
-                res.json(dbusersData);
+                res.json(dbthoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -72,6 +72,34 @@ const Thoughtscontroller = {
             }
             res.json(dbthoughtData);
         })
+        .catch(err => res.json(err));
+    },
+
+
+    addreaction ({ params, body}, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $push: { reactions: body } },
+            { new: true, runValidators: true }
+        )
+        .then(dbthoughtData => {
+            if (!dbthoughtData) {
+                res.status(404).json({ message: 'There are no thoughts with this id' });
+                return;
+            }
+            res.json(dbthoughtData)
+        })
+        .catch(err => res.json(err));
+    },
+
+    //delete Reaction
+    removereaction({ params }, res) {
+        Thought.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { new: true }
+        )
+        .then(dbthoughtData => res.json(dbthoughtData))
         .catch(err => res.json(err));
     }
 
