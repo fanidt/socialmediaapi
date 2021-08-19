@@ -28,17 +28,17 @@ SO THAT my website can handle large amounts of unstructured data
   ![alt text](https://img.shields.io/badge/license-MIT-green)
   
   ## Screenshot: <br />
-    ![alt text](./assets/api.png)(https://youtu.be/eLdCuvWI-b0)
+  ![alt text](./assets/api.png)(https://youtu.be/eLdCuvWI-b0)
   
   ## Installation: <br />
-  -> download the file
-  -> open the file in the command line
-  -> type npm install 
-  -> type npm start
+  -> download the file <br />
+  -> open the file in the command line <br />
+  -> type npm install  <br />
+  -> type npm start <br />
 
   ## Usage: <br />
-  -> open insomnia 
-  -> localhost:3001/...
+  -> open insomnia  <br />
+  -> localhost:3001/... <br />
   -> Enjoy :)
 
   ## Support: <br />
