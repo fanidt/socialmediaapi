@@ -28,7 +28,7 @@ SO THAT my website can handle large amounts of unstructured data
   ![alt text](https://img.shields.io/badge/license-MIT-green)
   
   ## Screenshot: <br />
-    ![alt text](./assets/api.png)()
+    ![alt text](./assets/api.png)(https://youtu.be/eLdCuvWI-b0)
   
   ## Installation: <br />
   -> download the file
