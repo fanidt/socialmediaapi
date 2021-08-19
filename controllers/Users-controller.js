@@ -21,7 +21,7 @@ const Userscontroller = {
     },
 
 
-    getusersbyid(req, res) {
+    getusersbyid({ params }, res) {
         Users.findOne({ _id: params.id })
             .populate({
                 path: 'thoughts',
