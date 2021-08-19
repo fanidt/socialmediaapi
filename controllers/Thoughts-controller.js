@@ -35,7 +35,7 @@ const Thoughtscontroller = {
     createthoughts({ params, body }, res) {
         Thoughts.create(body)
             .then(({ _id }) => {
-                return User.findOneAndUpdate(
+                return Users.findOneAndUpdate(
                     { username: body.username },
                     { $push: { thoughts: _id } },
                     { new: true }
@@ -53,7 +53,7 @@ const Thoughtscontroller = {
 
 
     updatethoughts({ params, body }, res) {
-        Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true }
+        Thoughts.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true }
         )
             .then(dbthoughtData => {
                 if (!dbthoughtData) {
@@ -65,7 +65,7 @@ const Thoughtscontroller = {
     },
 
     deletethoughts({ params, body }, res) {
-        Thought.findOneAndDelete({ _id: params.id })
+        Thoughts.findOneAndDelete({ _id: params.id })
             .then(dbthoughtData => {
                 if (!dbthoughtData) {
                     return res.status(404).json({ message: 'There are no thoughts with this id' })
@@ -76,9 +76,13 @@ const Thoughtscontroller = {
     },
 
 
+
     addreaction({ params, body }, res) {
-        Thought.findOneAndUpdate(
-            { _id: params.thoughtId }, { $push: { reactions: body } },
+
+        console.log("addreaction")
+        Thoughts.findOneAndUpdate(
+            { _id: params.thoughtId },
+            { $addToSet: { reactions: body } },
             { new: true, runValidators: true }
         )
             .then(dbthoughtData => {
@@ -93,12 +97,21 @@ const Thoughtscontroller = {
 
     //delete Reaction
     removereaction({ params }, res) {
-        Thought.findOneAndUpdate(
+        console.log(params.reactionId)
+        Thoughts.findOneAndUpdate(
             { _id: params.thoughtId },
             { $pull: { reactions: { reactionId: params.reactionId } } },
             { new: true }
         )
-            .then(dbthoughtData => res.json(dbthoughtData))
+            .then(dbthoughtData => {
+                if (!dbthoughtData) {
+                    res.status(404).json({ message: 'There are no thoughts with this id' });
+                    return;
+                }
+
+                res.json(dbthoughtData)
+
+            })
             .catch(err => res.json(err));
     }
 

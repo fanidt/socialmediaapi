@@ -22,7 +22,7 @@ router
     .delete(deletethoughts)
 
 router
-    .route('/:thoughtId/reactions')
+    .route('/:thoughtId/reactions/')
     .post(addreaction)
 
 router
